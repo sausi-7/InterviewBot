@@ -1,0 +1,46 @@
+<div class="page-container">
+  <h1 class="main-heading">Welcome to Sam AI</h1>
+
+  <div class="upload-container">
+    <label for="resumeUpload" class="upload-label">
+      <div class="upload-icon">📄</div>
+      <p>Click to upload your resume (PDF)</p>
+      <input type="file" id="resumeUpload" accept=".pdf" (change)="handleFileUpload($event)" />
+    </label>
+  </div>
+
+  @if(uploadedFile)
+  {
+  <div class="file-preview">
+    <span>{{ uploadedFile.name }}</span>
+    <span class="remove-icon" (click)="removeFile()">❌</span>
+  </div>
+  }
+
+  @if(!showSpinner)
+  {
+  <div class="button-container">
+    <button (click)="uploadToLLM('Summary')" class="cool-button">Generate Summary </button>
+    <button (click)="uploadToLLM('Rating')" class="cool-button">Rate Candidate</button>
+    <button (click)="uploadToLLM('Questionaire')" class="cool-button">Generate Questionnaire</button>
+  </div>
+  }
+  @else {
+  <div class="button-container">
+
+    <button class="cool-button" disabled>Generating ......</button>
+
+
+
+  </div>
+  }
+
+  @if(summary.length)
+  {
+  <div class="summary-container">
+    <h2>{{flag}}:</h2>
+    <pre>{{ summary }}</pre>
+  </div>
+  }
+
+</div>
